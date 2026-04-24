@@ -1,50 +1,56 @@
-# One Dollar Maker
+# Roasties
 
-A ready-to-ship $1 micro-offer landing page.
+AI landing-page roast after a verified 1 USDT TRC20 payment.
 
-## What it sells
+## Flow
 
-"$1 Roast" — the buyer sends a landing page and receives one brutally useful sentence about what is hurting conversions.
+1. Customer sends 1 USDT on TRC20 / Tron to:
+   `TBBR3P7L6F9Ta8miznGpEnF9emX9xqDLLr`
+2. Customer submits email, landing page URL, and Tron transaction hash.
+3. Backend verifies:
+   - token contract is USDT TRC20
+   - receiver is the Roasties wallet
+   - amount is at least 1 USDT
+   - transaction hash was not already used
+4. Backend fetches the landing page, asks OpenAI for one concise roast, and emails the result.
 
-Why this is practical:
-- no inventory
-- no backend
-- no ads required for the first sale
-- can be fulfilled manually in minutes
-- validates whether strangers will pay before building a bigger product
+## Environment variables
 
-## Payment
+Do not commit real secrets. Add these in Vercel Project Settings → Environment Variables.
 
-Current order email:
+Required:
 
-`grizzzlydagod@gmail.com`
+- `OPENAI_API_KEY`
+- `RESEND_API_KEY`
 
-Crypto payment is enabled manually:
+Recommended:
 
-- Token: USDT
-- Network: TRC20 / Tron
-- Wallet: `TBBR3P7L6F9Ta8miznGpEnF9emX9xqDLLr`
+- `OPENAI_MODEL` — use `gpt-5.5` only if your OpenAI account has access; otherwise `gpt-4.1-mini` works.
+- `FROM_EMAIL` — default is `Roasties <onboarding@resend.dev>`
+- `KV_REST_API_URL`
+- `KV_REST_API_TOKEN`
+- `TRONGRID_API_KEY`
 
-Customers should send $1 USDT TRC20, then email payment proof plus their landing page URL.
+## Local dev
 
-## Make it yours
+```bash
+npm install
+cp .env.example .env.local
+npm run dev
+```
 
-1. Open `index.html`.
-2. Optional: replace `grizzzlydagod@gmail.com` with another email.
-3. Optional: create a $1 payment link using Gumroad, PayPal, Stripe, Lemon Squeezy, or Ko-fi.
-4. Optional: replace the `mailto:` CTA links with your payment link.
-5. Deploy the folder to Vercel/Netlify/GitHub Pages or send the HTML directly.
+## Tests
 
-## Launch post
+```bash
+npm test
+```
 
-I’m doing $1 landing-page roasts today. Send your page, I’ll reply with one brutally honest sentence about what’s costing conversions. No call, no fluff. $1 because I want fast feedback. Link: YOUR_LINK
+## Deploy
 
-## Fulfillment script
+Import this repo into Vercel as a Next.js project. Add the env vars above before going live.
 
-Reply format:
+## Honest limits
 
-"The biggest issue is: [one specific problem]. Fix it by [one specific action]."
-
-Example:
-
-"The biggest issue is your headline says what you do, not why anyone should care. Fix it by replacing it with the concrete outcome: 'Get 3 more booked calls from your existing traffic this week.'"
+- Payment verification is on-demand after the user submits a transaction hash.
+- Without Vercel KV / Upstash Redis, duplicate tx protection uses in-memory fallback and is not reliable in serverless production.
+- TRC20 only. Wrong-network payments can be lost.

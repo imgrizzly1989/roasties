@@ -1,0 +1,1 @@
+{"scripts":{"dev":"next dev","build":"next build","test":"vitest run"},"dependencies":{"@vitejs/plugin-react":"latest","vite":"latest","vitest":"latest","next":"latest","react":"latest","react-dom":"latest","typescript":"latest","@types/node":"latest","@types/react":"latest","@types/react-dom":"latest"},"devDependencies":{}}
