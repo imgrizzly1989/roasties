@@ -13,12 +13,26 @@ Why this is practical:
 - can be fulfilled manually in minutes
 - validates whether strangers will pay before building a bigger product
 
+## Payment
+
+Current order email:
+
+`grizzzlydagod@gmail.com`
+
+Crypto payment is enabled manually:
+
+- Token: USDT
+- Network: TRC20 / Tron
+- Wallet: `TBBR3P7L6F9Ta8miznGpEnF9emX9xqDLLr`
+
+Customers should send $1 USDT TRC20, then email payment proof plus their landing page URL.
+
 ## Make it yours
 
 1. Open `index.html`.
-2. Replace `YOUR_EMAIL@example.com` with your email.
-3. Create a $1 payment link using Gumroad, PayPal, Stripe, Lemon Squeezy, or Ko-fi.
-4. Replace the two `mailto:` CTA links with your payment link.
+2. Optional: replace `grizzzlydagod@gmail.com` with another email.
+3. Optional: create a $1 payment link using Gumroad, PayPal, Stripe, Lemon Squeezy, or Ko-fi.
+4. Optional: replace the `mailto:` CTA links with your payment link.
 5. Deploy the folder to Vercel/Netlify/GitHub Pages or send the HTML directly.
 
 ## Launch post
